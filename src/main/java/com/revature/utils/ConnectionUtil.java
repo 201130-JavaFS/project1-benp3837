@@ -15,22 +15,22 @@ public class ConnectionUtil {
 			e.printStackTrace();
 		}
 		
-		String url = "jdbc:postgresql://localhost:5432/project1";
+		String url = "jdbc:postgresql://localhost:5432/postgres"; //THIS MAY HAVE TO END IN POSTGRES, NOT PROJECT1. cause we're calling the database.
 		String username = "postgres";
 		String password = "Sparky2014!!"; 
 		
 		return DriverManager.getConnection(url, username, password);
 	}
 
-	public static void main(String[] args) {
+	//public static void main(String[] args) {
 		
 		//Try with resources block. The try statement will stake a method that creates a resource, that will
 		//automatically be closed at the end of the try or catch block. It avoids the need for a finally block.
-		try(Connection conn = ConnectionUtil.getConnection()){
-			System.out.println("connection successful");
-		} catch(SQLException e) {
-			e.printStackTrace();
-	}
-}	
+		//try(Connection conn = ConnectionUtil.getConnection()){
+			//System.out.println("connection successful");
+		//} catch(SQLException e) {
+			//e.printStackTrace();
+	//}
+//}	
 	
 }
