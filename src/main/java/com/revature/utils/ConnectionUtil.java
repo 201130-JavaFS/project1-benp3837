@@ -15,7 +15,7 @@ public class ConnectionUtil {
 			e.printStackTrace();
 		}
 		
-		String url = "jdbc:postgresql://localhost:5432/postgres"; //THIS MAY HAVE TO END IN POSTGRES, NOT PROJECT1. cause we're calling the database.
+		String url = "jdbc:postgresql://localhost:5432/postgres?currentSchema=project1"; 
 		String username = "postgres";
 		String password = "Sparky2014!!"; 
 		

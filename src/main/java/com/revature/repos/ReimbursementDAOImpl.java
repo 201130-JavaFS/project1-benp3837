@@ -17,7 +17,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 	
 	@Override
 	public void addReimbursement(Reimbursement r) {
-		// insert into reimbursements (everything except reimb id) values (everything except reimb id. status pending);
+		// insert into reimbursements (everything except reimb id) values (everything except reimb id. status pending. resolver & resolved = null);
 		
 	}
 	
@@ -41,14 +41,15 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 	
 				while(rs.next()) {
 					Reimbursement r = new Reimbursement (
-							/*result.getInt("ave_id"), 
-							result.getString("ave_name"),
-							result.getString("ave_power"),
-							result.getString("first_name"),
-							result.getString("last_name"),
-							result.getInt("power_level"),
-							null	//home_fk could be null, but if not it takes a Home object	
-							*/	
+							rs.getInt("reimb_id"), 
+							rs.getDouble("reimb_amount"),
+							rs.getString("reimb_submitted"),
+							rs.getString("reimb_resolved"),
+							rs.getString("reimb_description"),
+							rs.getInt("reimb_author"),
+							rs.getInt("reimb_resolver"),
+							rs.getInt("reimb_status_id"),
+							rs.getInt("reimb_type_id")								
 							);
 							
 					list.add(r); //now the list will be populated by all the user's pending tickets
@@ -80,14 +81,15 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 			
 			while(rs.next()) {
 				Reimbursement r = new Reimbursement (
-						/*result.getInt("ave_id"), 
-						result.getString("ave_name"),
-						result.getString("ave_power"),
-						result.getString("first_name"),
-						result.getString("last_name"),
-						result.getInt("power_level"),
-						null	//home_fk could be null, but if not it takes a Home object	
-						*/	
+						rs.getInt("reimb_id"), 
+						rs.getDouble("reimb_amount"),
+						rs.getString("reimb_submitted"),
+						rs.getString("reimb_resolved"),
+						rs.getString("reimb_description"),
+						rs.getInt("reimb_author"),
+						rs.getInt("reimb_resolver"),
+						rs.getInt("reimb_status_id"),
+						rs.getInt("reimb_type_id")								
 						);
 						
 				list.add(r); //now the list will be populated by all the user's past tickets
@@ -112,15 +114,22 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 	}
 
 	@Override
-	public List<Reimbursement> filterByStatus(String status) {
-		//select * from reimbursements where reimb_status = ?
+	public List<Reimbursement> filterByStatus(int statusId) {
+		//select * from reimbursements where reimb_status_id = ?
 		return null;
 	}
 
 	@Override
-	public void changeStatus() {
+	public void approveTicket() {
 		//update statement probably idk lol
-		//
+		//change status id to 2 (accepted)
+		
+	}
+	
+	@Override
+	public void rejectTicket() {
+		//update statement probably idk lol
+		//change status to 3 (rejected)
 		
 	}
 

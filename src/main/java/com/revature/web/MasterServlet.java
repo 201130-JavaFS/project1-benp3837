@@ -18,19 +18,28 @@ public class MasterServlet extends HttpServlet{
 		
 		res.setStatus(404); //if no cases in the switch statement handle it, we default to 404
 		
-		final String URI = req.getRequestURI().replace("/Project-1/", "");
+		final String URI = req.getRequestURI().replace("/project-1/", "");
 		
+		//will most likely be like case "employees" and a bunch of if statements? Depending on which option is chosen?..
 		switch (URI) {
-		case "employees":
+		case "employees/past":
 			if(req.getSession(false)!=null) { //if the user is logged in
-			//send a redirect to the employees page
-			//do some stuff through the employee controller
+			//employees controller past ticket method
 			} else {
 				res.setStatus(403); //forbidden client error
 			}
+			break;
+			
+		case "employees/pending":
+			if(req.getSession(false)!=null) { //if the user is logged in
+			//employees controller present ticket method
+			} else {
+				res.setStatus(403); //forbidden client error
+			}
+			break;
+			
 		case "managers":
 			if(req.getSession(false)!=null) { //if the user is logged in
-			//send a redirect to the managers page 
 			//do some stuff through the employee controller
 			} else {
 				res.setStatus(403); //forbidden client error

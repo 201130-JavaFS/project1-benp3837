@@ -1,14 +1,17 @@
 package com.revature.services;
 
-public class LoginService { 
-	
-	//for the demo, we're using hardcoded username and password
-	//you will ACTUALLY have to send a json string with a username and password, parse it, and compare it to the ones in the DB
-	//and then like below, the method will return a boolean indicating valid or invalid username/password
+import com.revature.models.User;
+import com.revature.repos.LoginDAO;
 
+public class LoginService { 
+
+
+	LoginDAO lDAO = new LoginDAO();
+	User u = new User(); //This could be the problem, the DAO isn't being sent the correct userId, because the current user isn't selected?
+						 //It's either this, or my DAO methods aren't acting right
+	
 	public boolean login(String username, String password) {
-		if(username.equals("agent") && password.equals("cellist")) {
-			//this will actually be if(username.equals(dao get username) && password.equals(dao get password)){}
+		if(username.equals(lDAO.getUsername(username)) && password.equals(lDAO.getPassword(password))) { //hardcoding still gets 404. so it's a connection error?
 			return true;
 		}
 		return false; //if the username/password combo doesn't pass the vibe check

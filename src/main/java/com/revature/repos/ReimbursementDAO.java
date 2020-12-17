@@ -20,8 +20,10 @@ public interface ReimbursementDAO {
 	
 	public List<Reimbursement> viewAllTickets();
 	
-	public List<Reimbursement> filterByStatus(String status);
+	public List<Reimbursement> filterByStatus(int statusId);
 	
-	public void changeStatus();
+	public void approveTicket();
+	
+	public void rejectTicket();
 	
 }

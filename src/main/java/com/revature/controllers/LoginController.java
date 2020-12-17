@@ -54,26 +54,7 @@ public class LoginController {
 				res.getWriter().print("Login Failed");
 			} 	
 			
-		}  else if (req.getMethod().equals("GET")) {
-			//this elseif shows logging in with Query Params solely for the example. DON'T do this it's not secure and it's BAD
-			if(req.getParameterMap().containsKey("username") && req.getParameterMap().containsKey("password")) {
-				
-				if(ls.login(req.getParameter("username"), req.getParameter("password")));
-					HttpSession ses = req.getSession(); 
-					
-					ses.setAttribute("loggedin", true);
-					
-					res.setStatus(200);
-					res.getWriter().print("Login Successful");
-			} else {
-				HttpSession ses = req.getSession(false);
-				if (ses != null) { //more likely scenario
-					ses.invalidate(); //basically deletes the session, it will be garbage collected (hence logging out)+
-				}
-				res.setStatus(401); //unauthorized (in this case, cause their login credentials failed)
-				res.getWriter().print("Login Failed");
-			} 
-		}
+		}  
 		
 		
 		

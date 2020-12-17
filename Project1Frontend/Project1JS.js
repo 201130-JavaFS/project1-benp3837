@@ -31,60 +31,18 @@ async function loginFunc(){
 
     if(resp.status===200){
         document.getElementById("login-row").innerText="You Have Logged In!";
-        //THEN SEND THEM EITHER TO THE EMPLOYEE OR MANAGER HTML PAGE
-        //Realistic goal: try to get the "You Have Logged In" text. you can work from here down.
+        let user = await resp.json(); //should return a user?? and JS will decide which page to redirect to depending on role
+        //how do I get a user object (with all its values) from java into a json object?
+        if(user.role === "Employee"){
+            //send to employee page
+        }else if (user.role === "Manager"){
+            //send to manager page
+        }
+
+        //If role id = 2, send to employees page. if role id = 1, send to managers page
     } else {
         document.getElementById("login-row").innerText="Login Failed :( Reload and try again"; //anything besids 200  fails.
     }
 
 }
 
-async function assembleFunc(){
-    let response = await fetch(url+"avengers", {credentials: 'include'});
-  
-    if(response.status===200){
-      console.log(response);
-      let data = await response.json(); //data = the result of our fetch request aka the response object
-  
-      for(let avenger of data){
-        console.log(avenger);
-        let row = document.createElement("tr");
-  
-        let cell = document.createElement("td");
-        cell.innerHTML = avenger.aveId;
-        row.appendChild(cell);
-  
-        let cell2 = document.createElement("td");
-        cell2.innerHTML = avenger.aveName;
-        row.appendChild(cell2);
-  
-        let cell3 = document.createElement("td");
-        cell3.innerHTML = avenger.power;
-        row.appendChild(cell3);
-  
-        let cell4 = document.createElement("td");
-        cell4.innerHTML = avenger.firstName;
-        row.appendChild(cell4);
-  
-        let cell5 = document.createElement("td");
-        cell5.innerHTML = avenger.lastName;
-        row.appendChild(cell5);
-  
-        let cell6 = document.createElement("td");
-        cell6.innerHTML = avenger.powerLevel;
-        row.appendChild(cell6);
-  
-        if(avenger.home != null){
-          let cell7 = document.createElement("td");
-          cell7.innerHTML = avenger.home.homeName;
-          row.appendChild(cell7);
-        }else {
-          let cell7 = document.createElement("td");
-          row.appendChild(cell7);
-        }
-  
-        document.getElementById("avBody").appendChild(row);
-
-        }
-    }
-}
