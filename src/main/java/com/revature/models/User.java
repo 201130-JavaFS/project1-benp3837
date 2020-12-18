@@ -14,10 +14,10 @@ public class User {
 	
 	private String email;
 	
-	private String role;
+	private int roleId;
 
 	public User(int userId, String username, String password, String firstName, String lastName, String email,
-			String role) {
+			int roleId) {
 		super();
 		this.userId = userId;
 		this.username = username;
@@ -25,13 +25,15 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.role = role;
+		this.roleId = roleId;
 	}
 
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 
 	@Override
 	public int hashCode() {
@@ -41,7 +43,7 @@ public class User {
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((role == null) ? 0 : role.hashCode());
+		result = prime * result + roleId;
 		result = prime * result + userId;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
@@ -76,10 +78,7 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (role == null) {
-			if (other.role != null)
-				return false;
-		} else if (!role.equals(other.role))
+		if (roleId != other.roleId)
 			return false;
 		if (userId != other.userId)
 			return false;
@@ -94,7 +93,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", email=" + email + ", role=" + role + "]";
+				+ firstName + ", lastName=" + lastName + ", email=" + email + ", roleId=" + roleId + "]";
 	}
 
 	public int getUserId() {
@@ -145,13 +144,15 @@ public class User {
 		this.email = email;
 	}
 
-	public String getRole() {
-		return role;
+	public int getRoleId() {
+		return roleId;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
 	}
+
+
 	
 	
 	

@@ -11,9 +11,9 @@ public interface ReimbursementDAO {
 	
 	public void addReimbursement(Reimbursement r);
 	
-	public List<Reimbursement> viewPendingTickets(User u);
+	public List<Reimbursement> viewPendingTickets();
 	
-	public List<Reimbursement> viewPastTickets(User u);
+	public List<Reimbursement> viewPastTickets();
 	
 
 	//manager stuff

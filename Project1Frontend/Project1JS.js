@@ -15,28 +15,29 @@ async function loginFunc(){
     let usern = document.getElementById("username").value;
     let userp = document.getElementById("password").value;
 
-    let user = {
+    let userDetails = {
         username:usern,
         password:userp
     };
 
     let resp = await fetch(url+"login", { //resp will be the result of our res.x, res.y, res.z lines in the servlet
         method:"POST", //sending it as a POST
-        body: JSON.stringify(user),
+        body: JSON.stringify(userDetails),
         credentials: "include"
         //credentials: "include" will ensure that the cookie is captured
         //future fetch requests will also require this value in order to send the cookie back
     });
-    //if you recall the parameters a fetch request takes, you'll understand what's goin on here
 
     if(resp.status===200){
         document.getElementById("login-row").innerText="You Have Logged In!";
-        let user = await resp.json(); //should return a user?? and JS will decide which page to redirect to depending on role
-        //how do I get a user object (with all its values) from java into a json object?
-        if(user.role === "Employee"){
+        let user = await resp.json(); //should return a user, and JS will decide which page to redirect to depending on role
+        
+        if(user.roleId === 2){
             //send to employee page
-        }else if (user.role === "Manager"){
+            window.location.replace('file:///C:/Users/benp3/OneDrive/Documents/PROGRAMMING/Project1/project1-benp3837/Project1Frontend/EmployeePage.html');
+        }else if (user.roleId === 1){
             //send to manager page
+            window.location.replace('file:///C:/Users/benp3/OneDrive/Documents/PROGRAMMING/Project1/project1-benp3837/Project1Frontend/ManagerPage.html');
         }
 
         //If role id = 2, send to employees page. if role id = 1, send to managers page

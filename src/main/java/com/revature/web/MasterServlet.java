@@ -7,11 +7,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.revature.controllers.EmployeeController;
 import com.revature.controllers.LoginController;
+import com.revature.controllers.ManagerController;
 
 public class MasterServlet extends HttpServlet{
-	//private AvengersController ac = new AvengersController();
+	
+	private EmployeeController ec = new EmployeeController();
 	private LoginController lc = new LoginController();
+	private ManagerController mc = new ManagerController();
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		res.setContentType("application/json"); //its JSON the servlet is sending back ;)
@@ -20,30 +24,37 @@ public class MasterServlet extends HttpServlet{
 		
 		final String URI = req.getRequestURI().replace("/project-1/", "");
 		
-		//will most likely be like case "employees" and a bunch of if statements? Depending on which option is chosen?..
 		switch (URI) {
 		case "employees/past":
-			if(req.getSession(false)!=null) { //if the user is logged in
-			//employees controller past ticket method
-			} else {
-				res.setStatus(403); //forbidden client error
-			}
+			//if(req.getSession(false)!=null) { //if the user is logged in
+			ec.getPastReimbursements(res); //how do we send in the user's id?
+			//} else {
+			//	res.setStatus(403); //forbidden client error
+			//}
 			break;
 			
 		case "employees/pending":
+			//if(req.getSession(false)!=null) { //if the user is logged in
+			ec.getPendingReimbursements(res);
+			//} else {
+			//	res.setStatus(403); //forbidden client error
+			//}
+			break;
+			
+		case "employees/add":
 			if(req.getSession(false)!=null) { //if the user is logged in
-			//employees controller present ticket method
+			//add reimbursement method
 			} else {
 				res.setStatus(403); //forbidden client error
 			}
 			break;
 			
-		case "managers":
-			if(req.getSession(false)!=null) { //if the user is logged in
-			//do some stuff through the employee controller
-			} else {
-				res.setStatus(403); //forbidden client error
-			}
+		case "managers/all":
+			//if(req.getSession(false)!=null) { //if the user is logged in
+			mc.getAllTickets(res);
+			//} else {
+			//	res.setStatus(403); //forbidden client error
+			//}
 			break;
 		case "login":
 			lc.login(req, res);

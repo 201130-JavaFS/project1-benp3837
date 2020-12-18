@@ -10,18 +10,23 @@ public class ReimbursementService {
 
 	ReimbursementDAOImpl rd = new ReimbursementDAOImpl();
 	
-	public List<Reimbursement> getPastReimbursements(User u) {
-		// TODO Auto-generated method stub
-		rd.viewPastTickets(u);
-		return null;
+	public void addNewTicket(Reimbursement r) {
+		rd.addReimbursement(r);
 	}
-
-	public List<Reimbursement> getPendingReimbursements(User u) {
-		// TODO Auto-generated method stub
-		rd.viewPendingTickets(u);
-		return null;
-	}
-
 	
+	public List<Reimbursement> getPastReimbursements() {
+		return rd.viewPastTickets();
+	
+	}
+
+	public List<Reimbursement> getPendingReimbursements() {
+		return rd.viewPendingTickets();
+	}
+
+	//manager methods start here------------------
+	
+	public List<Reimbursement> viewAllTickets() {
+		return rd.viewAllTickets();
+	}
 	
 }

@@ -11,7 +11,7 @@ public class LoginService {
 						 //It's either this, or my DAO methods aren't acting right
 	
 	public boolean login(String username, String password) {
-		if(username.equals(lDAO.getUsername(username)) && password.equals(lDAO.getPassword(password))) { //hardcoding still gets 404. so it's a connection error?
+		if(username.equals(lDAO.getUsername(username)) && password.equals(lDAO.getPassword(password))) { 
 			return true;
 		}
 		return false; //if the username/password combo doesn't pass the vibe check

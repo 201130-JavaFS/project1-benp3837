@@ -9,12 +9,15 @@ import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.models.LoginDTO;
+import com.revature.models.User;
 import com.revature.services.LoginService;
+import com.revature.services.UserService;
 
 public class LoginController {
 
 	private ObjectMapper om = new ObjectMapper(); //lets us work with json
 	private LoginService ls = new LoginService();
+	private UserService us = new UserService();
 
 	public void login(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		
@@ -32,19 +35,25 @@ public class LoginController {
 			
 			//all of this stuff above gets the json string, and we put it into the body variable below
 			
-			String body = new String(sb);
+			String body = new String(sb); //called body, because it comes form the body of the request
 			
 			LoginDTO loginDTO = om.readValue(body, LoginDTO.class); //using object mapper, read the JSON string & make it into a LoginDTO object
 			//aka reads the value of your body variable, putting it into an object, in this case the LoginDTO
 			
 			if(ls.login(loginDTO.username, loginDTO.password)) { //if the login service method returns true based on the provided credentials...
 				HttpSession ses = req.getSession(); //start a new session
+								
+				//get the user's details from the userDAO	
+				User user = us.getUser(loginDTO.username);
+				String json = om.writeValueAsString(user);
+				res.getWriter().print(json);
 				
-				ses.setAttribute("user", loginDTO);
+				ses.setAttribute("user", loginDTO); 
 				ses.setAttribute("loggedin", true);
 				
 				res.setStatus(200);
-				res.getWriter().print("Login Successful"); //won't be seen by user, but it helps when debugging with postman
+				//res.getWriter().print("Login Successful"); //won't be seen by user, but it helps when debugging with postman
+
 			}else {
 				HttpSession ses = req.getSession(false);
 				if (ses != null) { //more likely scenario
