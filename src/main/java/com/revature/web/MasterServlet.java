@@ -43,7 +43,7 @@ public class MasterServlet extends HttpServlet{
 			
 		case "employees/add":
 			//if(req.getSession(false)!=null) { //if the user is logged in
-			//do the add reimbursement method
+			ec.addReimbursement(req, res);
 			//} else {
 			//	res.setStatus(403); //forbidden client error
 			//}
@@ -60,6 +60,14 @@ public class MasterServlet extends HttpServlet{
 		case "managers/filter":
 			//if(req.getSession(false)!=null) { //if the user is logged in
 			mc.getTicketsByStatus(req, res);
+			//} else {
+			//	res.setStatus(403); //forbidden client error
+			//}
+			break;
+			
+		case "managers/resolve":
+			//if(req.getSession(false)!=null) { //if the user is logged in
+			mc.resolveTicket(req, res);
 			//} else {
 			//	res.setStatus(403); //forbidden client error
 			//}

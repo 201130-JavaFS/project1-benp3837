@@ -2,11 +2,13 @@ const url = 'http://localhost:8080/project-1/employees/'; //does this have to ch
 
 document.getElementById("pastbutton").addEventListener('click', pastFunc);
 document.getElementById("pendingbutton").addEventListener('click', pendingFunc);
+document.getElementById("submitbutton").addEventListener('click', submitFunc);
 
 async function pastFunc(){
     let response = await fetch(url+"past", {credentials: 'include'});
   
     if(response.status===200){
+      document.getElementById("r_table").style.display = "block";
       console.log(response);
       let data = await response.json(); //this SHOULD send back a list of all past reimbursements
   
@@ -42,6 +44,9 @@ async function pastFunc(){
         cell7.innerHTML = reimbursement.typeId;
         row.appendChild(cell7);
 
+        let cell8 = document.createElement("td");
+        cell8.innerHTML = reimbursement.reimbursementId;
+        row.appendChild(cell8);
   
         document.getElementById("Body").appendChild(row);
 
@@ -53,6 +58,7 @@ async function pendingFunc(){
     let response = await fetch(url+"pending", {credentials: 'include'});
 
     if(response.status===200){
+        document.getElementById("r_table2").style.display = "block";
         console.log(response);
         let data = await response.json(); //this SHOULD send back a list of all past reimbursements
     
@@ -88,9 +94,36 @@ async function pendingFunc(){
           cell7.innerHTML = reimbursement.typeId;
           row.appendChild(cell7);
   
+          let cell8 = document.createElement("td");
+          cell8.innerHTML = reimbursement.reimbursementId;
+          row.appendChild(cell8);
     
-          document.getElementById("Body").appendChild(row);
+          document.getElementById("Body2").appendChild(row);
 
         }
     }
-}        
+}    
+
+async function submitFunc(){
+
+    let inputTypeId = document.getElementById("typeIdInput").value;
+    let inputDescription = document.getElementById("descriptionInput").value;
+    let inputAmount = document.getElementById("amountInput").value;
+
+    let userInput = {
+        typeId:inputTypeId,
+        description:inputDescription,
+        amount:inputAmount
+    };
+
+    let response = await fetch(url+"add", { 
+        method:"POST", //sending it as a POST
+        body: JSON.stringify(userInput),
+        credentials: "include"
+        });
+
+    if(response.status=200){
+        document.getElementById("hiddenMessage").style.display = "block";
+    }
+
+}

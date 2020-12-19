@@ -4,32 +4,29 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.models.Reimbursement;
-import com.revature.models.User;
 import com.revature.utils.ConnectionUtil;
 
 public class ReimbursementDAOImpl implements ReimbursementDAO {
 
 	
 	@Override
-	public void addReimbursement(Reimbursement r) {
+	public void addReimbursement(int typeId, String description, double amount) {
 		// insert into reimbursements (everything except reimb id) values (everything except reimb id. status pending. resolver & resolved = null);
 		try (Connection conn = ConnectionUtil.getConnection()){
 		
 			String sql = "insert into ers_reimbursements "
 						  + "(reimb_amount, reimb_submitted, reimb_resolved, reimb_description, "
 						  + "reimb_author, reimb_resolver, reimb_status_id, reimb_type_id)"
-						  + "values (?, (THIS TIME), null, ?, ?, 2, 1, ?);";
+						  + "values (?, current_timestamp, null, ?, 1, 2, 1, ?);";
 			
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setDouble(1, r.getAmount());
-			ps.setString(2, r.getDescription());
-			ps.setInt(3, r.getAuthor());
-			ps.setInt(4, r.getTypeId());
+			ps.setDouble(1, amount);
+			ps.setString(2, description);
+			ps.setInt(3, typeId);
 
 			ps.executeUpdate();
 			
@@ -203,17 +200,41 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 	}
 
 	@Override
-	public void approveTicket() {
-		//update statement probably idk lol
-		//change status id to 2 (accepted)
+	public void resolveTicket(int reimbursementId, int statusId) {
 		
-	}
-	
-	@Override
-	public void rejectTicket() {
-		//update statement probably idk lol
-		//change status to 3 (rejected)
-		
+		try (Connection conn = ConnectionUtil.getConnection()){
+			
+			String sql = "update ers_reimbursements set reimb_status_id = ?, reimb_resolver = 2, reimb_resolved = current_timestamp "
+					+ "where reimb_id = ?;";
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, statusId);
+			ps.setInt(2, reimbursementId);
+			ps.executeUpdate();
+			
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
 	}
 
+	/*
+	@Override
+	public void rejectTicket(int reimbursementId) {
+
+		try (Connection conn = ConnectionUtil.getConnection()){
+			
+			String sql = "update ers_reimbursements set reimb_status_id = 3, reimb_resolver = 2, reimb_resolved = current_timestamp "
+					+ "where reimbursementID = ?;";
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, reimbursementId);
+			ps.executeUpdate();
+			
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+	}
+	*/
 }

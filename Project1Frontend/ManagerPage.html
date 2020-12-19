@@ -24,6 +24,7 @@
                             <th>Resolver</th>
                             <th>Status</th>
                             <th>Type</th>
+                            <th>ID</th>
                         </tr>
                     </thead>
                     <tbody id="Body"></tbody>
@@ -37,6 +38,7 @@
 
             <h3>Filter Tickets by Status</h3>
             <p style="box-shadow: darkslategray; font-style: italic;">1) Pending 2) Accepted 3) Rejected</p>
+            
             <div>
                 <input type="number" id="dataInput"/>
                 <button id="filterbutton" class="btn btn-danger">Search</button>
@@ -56,6 +58,7 @@
                             <th>Resolver</th>
                             <th>Status</th>
                             <th>Type</th>
+                            <th>ID</th>
                         </tr>
                     </thead>
                     <tbody id="Body2"></tbody>
@@ -68,11 +71,17 @@
             <br>
 
             <h3>Resolve Tickets</h3>
+
             <div>
-                <input type="number" id="ticketInput" placeholder="ticket number"/>
+                <input type="number" id="ticketInput" placeholder="ticket id"/>
                 <input type="number" id="statusInput" placeholder="new status id"/>
-                <button id="resolvebutton" class="btn btn-danger">ideally won't implement resolving this way</button>
+                <button id="resolvebutton" class="btn btn-danger">Resolve</button>
             </div>
+
+            <br>
+            <br>
+
+            <p id="hiddenMessage" style="display:none; box-shadow:darkslategray; font-style: italic;">Ticket Resolved!</p>
 
         </div>
 

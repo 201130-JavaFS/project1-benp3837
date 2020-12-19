@@ -9,7 +9,7 @@ public interface ReimbursementDAO {
 
 	//employee stuff
 	
-	public void addReimbursement(Reimbursement r);
+	public void addReimbursement(int typeId, String description, double amount);
 	
 	public List<Reimbursement> viewPendingTickets();
 	
@@ -22,8 +22,8 @@ public interface ReimbursementDAO {
 	
 	public List<Reimbursement> filterByStatus(int statusId);
 	
-	public void approveTicket();
+	public void resolveTicket(int reimbursementId, int reimbursementStatus);
 	
-	public void rejectTicket();
+	//public void rejectTicket(int reimbursementId);
 	
 }

@@ -10,8 +10,8 @@ public class ReimbursementService {
 
 	ReimbursementDAOImpl rd = new ReimbursementDAOImpl();
 	
-	public void addNewTicket(Reimbursement r) {
-		rd.addReimbursement(r);
+	public void addNewTicket(int typeId, String description, double amount) {
+		rd.addReimbursement(typeId, description, amount);
 	}
 	
 	public List<Reimbursement> getPastReimbursements() {
@@ -31,6 +31,10 @@ public class ReimbursementService {
 	
 	public List<Reimbursement> filterByStatus(int statusId) {
 		return rd.filterByStatus(statusId);
+	}
+	
+	public void resolveTicket(int reimbursementId, int statusId) {
+		rd.resolveTicket(reimbursementId, statusId);
 	}
 	
 }

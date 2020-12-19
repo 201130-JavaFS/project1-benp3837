@@ -52,8 +52,28 @@ public class ManagerController {
 			res.setStatus(200); //200 Success
 		}
 	}	
+	
 	public void resolveTicket(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		
+		if(req.getMethod().equals("POST")) { //make sure we're reading a POST request
+			BufferedReader reader = req.getReader(); //BufferedReader is how we read each line of our body
+			
+			StringBuilder sb = new StringBuilder(); //will get filled with the values of the JSON object
+			
+			String line = reader.readLine();
+			
+			while(line!=null) { //while there are still lines...
+				sb.append(line); //add the line 
+				line = reader.readLine(); //move on to the next line
+			}
+			
+			String body = new String(sb);
+			
+			ReimbursementDTO rDTO = om.readValue(body, ReimbursementDTO.class);			
+			rs.resolveTicket(rDTO.reimbursementId, rDTO.statusId);		
+			res.setStatus(200);
+			
+		}
 	}
 	
 }
