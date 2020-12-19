@@ -35,7 +35,7 @@ public class LoginController {
 			
 			//all of this stuff above gets the json string, and we put it into the body variable below
 			
-			String body = new String(sb); //called body, because it comes form the body of the request
+			String body = new String(sb); //called body, because it comes from the body of the request
 			
 			LoginDTO loginDTO = om.readValue(body, LoginDTO.class); //using object mapper, read the JSON string & make it into a LoginDTO object
 			//aka reads the value of your body variable, putting it into an object, in this case the LoginDTO

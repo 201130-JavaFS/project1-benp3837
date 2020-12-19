@@ -29,4 +29,8 @@ public class ReimbursementService {
 		return rd.viewAllTickets();
 	}
 	
+	public List<Reimbursement> filterByStatus(int statusId) {
+		return rd.filterByStatus(statusId);
+	}
+	
 }
