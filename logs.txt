@@ -26,3 +26,4 @@
 2020-12-21 22:39:12 INFO  LoginService:45 - reimbursements with status 3 requested
 2020-12-21 22:39:22 INFO  LoginService:38 - All reimbursements requested
 2020-12-21 22:39:35 INFO  LoginService:45 - reimbursements with status 1 requested
+2020-12-22 13:24:37 INFO  LoginService:15 - User Benp3837 logged in.

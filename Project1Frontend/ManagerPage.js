@@ -41,9 +41,13 @@ async function allFunc(){
             let cell6 = document.createElement("td");
             cell6.innerHTML = "Accepted";
             row.appendChild(cell6);
-        } else {
+        } else if(reimbursement.statusId == 3) {
             let cell6 = document.createElement("td");
             cell6.innerHTML = "Rejected";
+            row.appendChild(cell6);
+        } else {
+            let cell6 = document.createElement("td");
+            cell6.innerHTML = "Pending";
             row.appendChild(cell6);
         }
 
@@ -121,9 +125,13 @@ async function filterFunc(){
                 let cell6 = document.createElement("td");
                 cell6.innerHTML = "Accepted";
                 row.appendChild(cell6);
-            } else {
+            } else if(reimbursement.statusId == 3) {
                 let cell6 = document.createElement("td");
                 cell6.innerHTML = "Rejected";
+                row.appendChild(cell6);
+            } else {
+                let cell6 = document.createElement("td");
+                cell6.innerHTML = "Pending";
                 row.appendChild(cell6);
             }
       
