@@ -3,6 +3,7 @@ const url = 'http://localhost:8080/project-1/managers/'; //does this have to cha
 document.getElementById("allbutton").addEventListener('click', allFunc);
 document.getElementById("filterbutton").addEventListener('click', filterFunc);
 document.getElementById("resolvebutton").addEventListener('click', resolveFunc);
+document.getElementById("logoutbutton").addEventListener('click', logoutFunc);
 
 
 async function allFunc(){
@@ -36,12 +37,31 @@ async function allFunc(){
         cell5.innerHTML = reimbursement.resolver;
         row.appendChild(cell5);
   
-        let cell6 = document.createElement("td");
-        cell6.innerHTML = reimbursement.statusId;
-        row.appendChild(cell6);
+        if(reimbursement.statusId == 2){
+            let cell6 = document.createElement("td");
+            cell6.innerHTML = "Accepted";
+            row.appendChild(cell6);
+        } else {
+            let cell6 = document.createElement("td");
+            cell6.innerHTML = "Rejected";
+            row.appendChild(cell6);
+        }
 
         let cell7 = document.createElement("td");
-        cell7.innerHTML = reimbursement.typeId;
+        switch(reimbursement.typeId){
+        case 1:
+            cell7.innerHTML = "Lodging";
+            break;
+        case 2:
+            cell7.innerHTML = "Travel";
+            break;
+        case 3:
+            cell7.innerHTML = "Food";
+            break;
+        case 4:
+            cell7.innerHTML = "Other";
+            break;
+        }
         row.appendChild(cell7);
 
         let cell8 = document.createElement("td");
@@ -97,12 +117,31 @@ async function filterFunc(){
             cell5.innerHTML = reimbursement.resolver;
             row.appendChild(cell5);
         
-            let cell6 = document.createElement("td");
-            cell6.innerHTML = reimbursement.statusId;
-            row.appendChild(cell6);
+            if(reimbursement.statusId == 2){
+                let cell6 = document.createElement("td");
+                cell6.innerHTML = "Accepted";
+                row.appendChild(cell6);
+            } else {
+                let cell6 = document.createElement("td");
+                cell6.innerHTML = "Rejected";
+                row.appendChild(cell6);
+            }
       
             let cell7 = document.createElement("td");
-            cell7.innerHTML = reimbursement.typeId;
+            switch(reimbursement.typeId){
+            case 1:
+                cell7.innerHTML = "Lodging";
+                break;
+            case 2:
+                cell7.innerHTML = "Travel";
+                break;
+            case 3:
+                cell7.innerHTML = "Food";
+                break;
+            case 4:
+                cell7.innerHTML = "Other";
+                break;
+            }
             row.appendChild(cell7);
 
             let cell8 = document.createElement("td");
@@ -134,5 +173,8 @@ async function resolveFunc(){
     if(response.status=200){
         document.getElementById("hiddenMessage").style.display = "block";
     }
+}
 
+function logoutFunc(){
+    window.location.replace('file:///C:/Users/benp3/OneDrive/Documents/PROGRAMMING/Project1/project1-benp3837/Project1Frontend/Project1HTML.html');
 }

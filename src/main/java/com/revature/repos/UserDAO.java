@@ -4,14 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.revature.models.Reimbursement;
 import com.revature.models.User;
 import com.revature.utils.ConnectionUtil;
 
-public class UserDAO {
+public class UserDAO implements UserDAOInterface {
 
 	public User getUserByUsername(String username) {
 		try (Connection conn = ConnectionUtil.getConnection()){
@@ -24,8 +21,6 @@ public class UserDAO {
 			ps.setString(1, username);
 
 			rs = ps.executeQuery();
-			
-			//List<User> list = new ArrayList<>();
 			
 			while(rs.next()) {
 				User u = new User (
@@ -40,8 +35,6 @@ public class UserDAO {
 				
 				return u;
 			}
-			
-			//return list;
 					
 		} catch (SQLException e){
 			e.printStackTrace();

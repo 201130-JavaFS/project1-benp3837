@@ -1,9 +1,6 @@
 const url = 'http://localhost:8080/project-1/';
 
-document.getElementById("loginbtn").addEventListener('click', loginFunc);
-
-//document.getElementById("getAvButton").addEventListener('click', pastReimbursements);
-//this^^^ amongst other buttons will show up upon login, and that's when the user chooses what they wanna do 
+document.getElementById("loginbtn").addEventListener('click', loginFunc); 
 
 //EMPLOYEES need a buttons to view past tickets and pending tickets, and a form to add new tickets
 
@@ -42,7 +39,7 @@ async function loginFunc(){
 
         //If role id = 2, send to employees page. if role id = 1, send to managers page
     } else {
-        document.getElementById("login-row").innerText="Login Failed :( Reload and try again"; //anything besids 200  fails.
+        document.getElementById("login-row").innerText="Login Failed :( Reload and try again"; //anything besids 200 fails.
     }
 
 }

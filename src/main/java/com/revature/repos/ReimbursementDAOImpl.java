@@ -220,7 +220,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 
 	/*
 	@Override
-	public void rejectTicket(int reimbursementId) {
+	public void rejectTicket(int reimbursementId) { //will probably just make one resolveTicket method
 
 		try (Connection conn = ConnectionUtil.getConnection()){
 			

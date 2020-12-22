@@ -1,18 +1,20 @@
 package com.revature.services;
 
-import com.revature.models.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.repos.LoginDAO;
 
 public class LoginService { 
-
+	private static final Logger log = LogManager.getLogger(LoginService.class);
 
 	LoginDAO lDAO = new LoginDAO();
-	User u = new User(); //This could be the problem, the DAO isn't being sent the correct userId, because the current user isn't selected?
-						 //It's either this, or my DAO methods aren't acting right
 	
 	public boolean login(String username, String password) {
 		if(username.equals(lDAO.getUsername(username)) && password.equals(lDAO.getPassword(password))) { 
+			log.info("User " + username + " logged in.");
 			return true;
+			
 		}
 		return false; //if the username/password combo doesn't pass the vibe check
 	}

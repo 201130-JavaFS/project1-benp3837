@@ -42,7 +42,9 @@ public class LoginController {
 			
 			if(ls.login(loginDTO.username, loginDTO.password)) { //if the login service method returns true based on the provided credentials...
 				HttpSession ses = req.getSession(); //start a new session
-								
+						
+				res.setStatus(200);
+				
 				//get the user's details from the userDAO	
 				User user = us.getUser(loginDTO.username);
 				String json = om.writeValueAsString(user);
@@ -51,7 +53,7 @@ public class LoginController {
 				ses.setAttribute("user", loginDTO); 
 				ses.setAttribute("loggedin", true);
 				
-				res.setStatus(200);
+				
 				//res.getWriter().print("Login Successful"); //won't be seen by user, but it helps when debugging with postman
 
 			}else {

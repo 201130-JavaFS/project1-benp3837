@@ -3,6 +3,7 @@ const url = 'http://localhost:8080/project-1/employees/'; //does this have to ch
 document.getElementById("pastbutton").addEventListener('click', pastFunc);
 document.getElementById("pendingbutton").addEventListener('click', pendingFunc);
 document.getElementById("submitbutton").addEventListener('click', submitFunc);
+document.getElementById("logoutbutton").addEventListener('click', logoutFunc);
 
 async function pastFunc(){
     let response = await fetch(url+"past", {credentials: 'include'});
@@ -23,11 +24,11 @@ async function pastFunc(){
         let cell2 = document.createElement("td");
         cell2.innerHTML = reimbursement.timeSubmitted;
         row.appendChild(cell2);
-  
+
         let cell3 = document.createElement("td");
         cell3.innerHTML = reimbursement.description;
-        row.appendChild(cell3);
-  
+        row.appendChild(cell3)
+
         let cell4 = document.createElement("td");
         cell4.innerHTML = reimbursement.author;
         row.appendChild(cell4);
@@ -36,12 +37,31 @@ async function pastFunc(){
         cell5.innerHTML = reimbursement.resolver;
         row.appendChild(cell5);
   
-        let cell6 = document.createElement("td");
-        cell6.innerHTML = reimbursement.statusId;
-        row.appendChild(cell6);
+        if(reimbursement.statusId == 2){
+            let cell6 = document.createElement("td");
+            cell6.innerHTML = "Accepted";
+            row.appendChild(cell6);
+        } else {
+            let cell6 = document.createElement("td");
+            cell6.innerHTML = "Rejected";
+            row.appendChild(cell6);
+        }
 
         let cell7 = document.createElement("td");
-        cell7.innerHTML = reimbursement.typeId;
+        switch(reimbursement.typeId){
+        case 1:
+            cell7.innerHTML = "Lodging";
+            break;
+        case 2:
+            cell7.innerHTML = "Travel";
+            break;
+        case 3:
+            cell7.innerHTML = "Food";
+            break;
+        case 4:
+            cell7.innerHTML = "Other";
+            break;
+        }
         row.appendChild(cell7);
 
         let cell8 = document.createElement("td");
@@ -85,18 +105,27 @@ async function pendingFunc(){
           let cell5 = document.createElement("td");
           cell5.innerHTML = reimbursement.resolver;
           row.appendChild(cell5);
-    
+  
           let cell6 = document.createElement("td");
-          cell6.innerHTML = reimbursement.statusId;
+          switch(reimbursement.typeId){
+          case 1:
+              cell6.innerHTML = "Lodging";
+              break;
+          case 2:
+              cell6.innerHTML = "Travel";
+              break;
+          case 3:
+              cell6.innerHTML = "Food";
+              break;
+          case 4:
+              cell6.innerHTML = "Other";
+              break;
+          }
           row.appendChild(cell6);
   
           let cell7 = document.createElement("td");
-          cell7.innerHTML = reimbursement.typeId;
+          cell7.innerHTML = reimbursement.reimbursementId;
           row.appendChild(cell7);
-  
-          let cell8 = document.createElement("td");
-          cell8.innerHTML = reimbursement.reimbursementId;
-          row.appendChild(cell8);
     
           document.getElementById("Body2").appendChild(row);
 
@@ -122,8 +151,12 @@ async function submitFunc(){
         credentials: "include"
         });
 
-    if(response.status=200){
+    if(inputTypeId > 0 && inputTypeId < 5){
         document.getElementById("hiddenMessage").style.display = "block";
-    }
+    } else document.getElementById("failureMessage").style.display = "block";
 
+}
+
+function logoutFunc(){
+    window.location.replace('file:///C:/Users/benp3/OneDrive/Documents/PROGRAMMING/Project1/project1-benp3837/Project1Frontend/Project1HTML.html');
 }

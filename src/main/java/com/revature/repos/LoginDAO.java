@@ -4,14 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.revature.models.Reimbursement;
-import com.revature.models.User;
 import com.revature.utils.ConnectionUtil;
 
-public class LoginDAO {
+public class LoginDAO implements LoginDAOInterface{
 	
 	//gotta get username 
 	public String getUsername(String username) { 
